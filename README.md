@@ -4,6 +4,15 @@
 
 MT-CNN is a CNN for Natural Language Processing and Information Extraction from free-form texts. BSEC group designed the model for information extraction from cancer pathology reports.
 
+### Completed Model Trans_Validate Template
+Model Developer/POC: Hong-Jun Yoon </br>
+Model Name: MT-CNN </br>
+Inputs: Indices of tokenized text </br>
+Outputs: softmax </br>
+Training Data: sample data available in the repo </br>
+Uncertainty Quantification: N/A </br>
+Platform: Keras/Tensorflow </br>
+
 ### Installation
 
 MT-CNN is written and tested in `Python 3.6` with the following dependencies.
