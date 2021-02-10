@@ -2,7 +2,24 @@
 
 ##### Author: Biomedical Sciences, Engineering and Computing Group, Computer Sciences and Engineering Division, Oak Ridge National Laboratory
 
-MT-CNN is a CNN for Natural Language Processing and Information Extraction from free-form texts. BSEC group designed the model for information extraction from cancer pathology reports.
+### Description:
+MT-CNN is a CNN for Natural Language Processing (NLP) and Information Extraction from free-form texts. BSEC group designed the model for information extraction from cancer pathology reports.
+
+### User Community:	
+Data scientist interested in classifying free form texts (e.g. pathology reports, clinical trials, abstracts, etc.) 
+
+### Usability:	
+The provided untrained model can be used by a data scientist to be trained on their own data, or use the trained model to classify the provided test samples. The provided scripts use pathology report that has been downloaded, converted to txt, cleaned and preprocessed from the Genomics Data Commons. Here is an example [report](https://portal.gdc.cancer.gov/legacy-archive/files/a9a42650-4613-448d-895e-4f904285f508).
+
+### Uniqueness:	
+Classification of unstructured text is a classical problem in natural language processing. There are state of arts models like BERT, Bio-BERT, and Transformer that have been developed by the community. This model have advantage or working on relatively long report (i.e., over 400 words) and shows scalability in terms of accuracy and speed with relatively small number of unstructured pathology reports. 
+
+### Components:	
+* Original and processed training, validation, and test data
+* Untrained neural network model
+* Trained model weights and topology to be used in inference.
+
+
 
 ### Completed Model Trans_Validate Template
 Model Developer/POC: Hong-Jun Yoon </br>
