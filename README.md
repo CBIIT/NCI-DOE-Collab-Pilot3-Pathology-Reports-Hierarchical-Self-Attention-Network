@@ -30,22 +30,28 @@ Training Data: sample data available in the repo </br>
 Uncertainty Quantification: N/A </br>
 Platform: Keras/Tensorflow </br>
 
-### Installation
 
-MT-CNN is written and tested in `Python 3.6` with the following dependencies.
+### Software Setup:
+To setup the python environment needed to train and run this model, first make sure you install [conda](https://docs.conda.io/en/latest/) package manager, clone this repository, then create the environment as shown below.
 
-- Keras: The Python Deep Learning library
-    - `pip install keras`
-- TensorFlow: An open source machine learning framework
-    - `pip install tensorflow`
-- scikit-learn: Machine Learning in Python
-    - `pip install scikit-learn`
-- NumPy: The fundamental package for scientific computing with Python
-    - `pip install numpy`
-- SciPy: The Python-based ecosystem of open-source software for mathematics, science, and engineering.
-    - `pip install scipy`
+```bash
+   conda env create -f environment.yml -n mt-cnn
+   conda activate mt-cnn
+   ```
+### Data Setup:
+To download the  data needed to train and test the model, and the trained model files, you should create an account first on the Model and Data Clearinghouse [MoDac](modac.cancer.gov).
 
-### Run with sample data
+Then run the script [data_handler.py](./data_hander.py) which will do the following: 
+* Download the GDC pathology reports from MoDac
+* Split the data into training/validation/test datasets
+* Clean up punctuation and unecessary tokens from the reports
+* Train a word embedding network to convert every word in the reports to an embedding vector of size 300
+* Use the trained word embedding model to encode every report into a numpy array of size (1500 * 300)
+* Generate numpy arrays for the training/validation/test datasets.
+
+More information about the original, cleaned, and generated data can be bound in the README.txt file that will be downloaded in the ./data directory.
+
+### Training:
 
 To train a MT-CNN model with the sample data, execute the script `mt_cnn_exp.py`. This script calls MT-CNN implementation in `keras_mt_shared_cnn.py`
 
