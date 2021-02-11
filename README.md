@@ -58,50 +58,53 @@ To train a MT-CNN model with the sample data, execute the script `mt_cnn_exp.py`
 ```
 $ python mt_cnn_exp.py
 Using TensorFlow backend.
-
+....
+Number of classes:  [25, 117]
+Model file:  mt_cnn_model.h5
 __________________________________________________________________________________________________
-Layer (type)                    Output Shape         Param #     Connected to
+Layer (type)                    Output Shape         Param #     Connected to                     
 ==================================================================================================
-Input (InputLayer)              (None, 1500)         0
+Input (InputLayer)              (None, 1500)         0                                            
 __________________________________________________________________________________________________
-embedding (Embedding)           (None, 1500, 300)    1396200     Input[0][0]
+embedding (Embedding)           (None, 1500, 300)    6948900     Input[0][0]                      
 __________________________________________________________________________________________________
-0_thfilter (Conv1D)             (None, 1500, 100)    90100       embedding[0][0]
+0_thfilter (Conv1D)             (None, 1500, 100)    90100       embedding[0][0]                  
 __________________________________________________________________________________________________
-1_thfilter (Conv1D)             (None, 1500, 100)    120100      embedding[0][0]
+1_thfilter (Conv1D)             (None, 1500, 100)    120100      embedding[0][0]                  
 __________________________________________________________________________________________________
-2_thfilter (Conv1D)             (None, 1500, 100)    150100      embedding[0][0]
+2_thfilter (Conv1D)             (None, 1500, 100)    150100      embedding[0][0]                  
 __________________________________________________________________________________________________
-global_max_pooling1d_1 (GlobalM (None, 100)          0           0_thfilter[0][0]
+global_max_pooling1d_1 (GlobalM (None, 100)          0           0_thfilter[0][0]                 
 __________________________________________________________________________________________________
-global_max_pooling1d_2 (GlobalM (None, 100)          0           1_thfilter[0][0]
+global_max_pooling1d_2 (GlobalM (None, 100)          0           1_thfilter[0][0]                 
 __________________________________________________________________________________________________
-global_max_pooling1d_3 (GlobalM (None, 100)          0           2_thfilter[0][0]
+global_max_pooling1d_3 (GlobalM (None, 100)          0           2_thfilter[0][0]                 
 __________________________________________________________________________________________________
-concatenate_1 (Concatenate)     (None, 300)          0           global_max_pooling1d_1[0][0]
-                                                                 global_max_pooling1d_2[0][0]
-                                                                 global_max_pooling1d_3[0][0]
+concatenate_1 (Concatenate)     (None, 300)          0           global_max_pooling1d_1[0][0]     
+                                                                 global_max_pooling1d_2[0][0]     
+                                                                 global_max_pooling1d_3[0][0]     
 __________________________________________________________________________________________________
-dropout_1 (Dropout)             (None, 300)          0           concatenate_1[0][0]
+dropout_1 (Dropout)             (None, 300)          0           concatenate_1[0][0]              
 __________________________________________________________________________________________________
-Dense0 (Dense)                  (None, 6)            1806        dropout_1[0][0]
+site (Dense)                    (None, 25)           7525        dropout_1[0][0]                  
 __________________________________________________________________________________________________
-Dense1 (Dense)                  (None, 2)            602         dropout_1[0][0]
-__________________________________________________________________________________________________
-Dense2 (Dense)                  (None, 2)            602         dropout_1[0][0]
-__________________________________________________________________________________________________
-Dense3 (Dense)                  (None, 3)            903         dropout_1[0][0]
+histology (Dense)               (None, 117)          35217       dropout_1[0][0]                  
 ==================================================================================================
-Total params: 1,760,413
-Trainable params: 1,760,413
+Total params: 7,351,942
+Trainable params: 7,351,942
 Non-trainable params: 0
 __________________________________________________________________________________________________
 None
-Train on 1000 samples, validate on 100 samples
-Epoch 1/100
-496/1000 [=============>................] - ETA: 2:07 - loss: 3.1325 - Dense0_loss: 0.8384 - Dense1_loss: 0.3084 - Dense2_loss: 0.2827 - Dense3_loss: 0.9116 - Dense0_acc: 0.7106 - Dense1_acc: 0.8434 - Dense2_acc: 0.8941 - Dense3_acc: 0.5377
+Train on 4579 samples, validate on 509 samples
+.....
+.....
+Epoch 23/100
+ - 6s - loss: 0.6748 - site_loss: 0.0386 - histology_loss: 0.2119 - site_acc: 0.9891 - histology_acc: 0.9378 - val_loss: 1.4682 - val_site_loss: 0.1636 - val_histology_loss: 0.8718 - val_site_acc: 0.9489 - val_histology_acc: 0.8075
 
-...
+Epoch 00023: val_loss did not improve from 1.38362
+Prediction on test set
+task site test f-score: 0.9654,0.9381
+task histology test f-score: 0.8003,0.4069
 
 ```
 
