@@ -48,9 +48,6 @@ def parse_arguments():
     return args
 
 
-args = parse_arguments()
-# Word2Vec Parameters
-word2vec_min_count = 5
 
 # Splits the documents based on Train, Val and Test Label Split in  trainTestSplitMetaData.py
 def get_split_docs(args):
@@ -167,6 +164,7 @@ def prep_data_CNN(documents):
 
 def word2Vec(docs,word_index):
 
+    word2vec_min_count = 5
     # train word2vec
     sentences = docs
     model = Word2Vec(sentences, min_count=word2vec_min_count, size=300, workers=4, iter=10)
@@ -201,6 +199,10 @@ def word2Vec(docs,word_index):
     return text_idx,word2idx,vocab
 
 if __name__ == '__main__':
+
+
+    args = parse_arguments()
+    # Word2Vec Parameters
     
     tr_docs, te_docs, tv_docs, y_train, y_test, y_val = get_split_docs(args)
     prep_docs = tr_docs + tv_docs + te_docs
