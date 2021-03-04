@@ -1,59 +1,61 @@
 ## Multi Task-Convolutional Neural Networks (MT-CNN)
 
-##### Author: Biomedical Sciences, Engineering and Computing Group, Computer Sciences and Engineering Division, Oak Ridge National Laboratory
+##### Author: Biomedical Sciences, Engineering, and Computing (BSEC) Group; Computer Sciences and Engineering Division; Oak Ridge National Laboratory
 
-### Description:
-MT-CNN is a CNN for Natural Language Processing (NLP) and Information Extraction from free-form texts. BSEC group designed the model for information extraction from cancer pathology reports.
+### Description
+MT-CNN is a CNN for natural language processing (NLP) and information Extraction from free-form texts. BSEC group designed the model for information extraction from cancer pathology reports.
 
-### User Community:	
-Data scientist interested in classifying free form texts (e.g. pathology reports, clinical trials, abstracts, etc.) 
+### User Community
+Data scientists interested in classifying free form texts (such as pathology reports, clinical trials, abstracts, and so on). 
 
-### Usability:	
-The provided untrained model can be used by a data scientist to be trained on their own data, or use the trained model to classify the provided test samples. The provided scripts use pathology report that has been downloaded, converted to txt, cleaned and preprocessed from the Genomics Data Commons. Here is an example [report](https://portal.gdc.cancer.gov/legacy-archive/files/a9a42650-4613-448d-895e-4f904285f508).
+### Usability
+The provided untrained model can be used by data scientists to be trained on their own data, or use the trained model to classify the provided test samples. The provided scripts use a pathology report that has been downloaded from the Genomics Data Commons, converted to text format, cleaned, and preprocessed. Here is an example [report](https://portal.gdc.cancer.gov/legacy-archive/files/a9a42650-4613-448d-895e-4f904285f508).
 
-### Uniqueness:	
-Classification of unstructured text is a classical problem in natural language processing. There are state of arts models like BERT, Bio-BERT, and Transformer that have been developed by the community. This model have advantage or working on relatively long report (i.e., over 400 words) and shows scalability in terms of accuracy and speed with relatively small number of unstructured pathology reports. 
+### Uniqueness
+Classification of unstructured text is a classical problem in natural language processing. The community has developed state-of-the-art models like BERT, Bio-BERT, and Transformer. This model has the advantage of working on a relatively long report (that is, over 400 words) and shows scalability in terms of accuracy and speed with relatively small number of unstructured pathology reports. 
 
-### Components:	
-* Original and processed training, validation, and test data
-* Untrained neural network model
+### Components
+* Original and processed training, validation, and test data.
+* Untrained neural network model.
 * Trained model weights and topology to be used in inference.
 
-
-
 ### Completed Model Trans_Validate Template
-Model Developer/POC: Hong-Jun Yoon </br>
-Model Name: MT-CNN </br>
-Inputs: Indices of tokenized text </br>
-Outputs: softmax </br>
-Training Data: sample data available in the repo </br>
-Uncertainty Quantification: N/A </br>
-Platform: Keras/Tensorflow </br>
+| Attribute  | Value |
+| ------------- | ------------- |
+| Model Developer/POC  | Hong-Jun Yoon |
+| Model Name | MT-CNN |
+| Inputs  | Indices of tokenized text  |
+| Outputs  | softmax  |
+| Training Data  | sample data available in the repo  |
+| Uncertainty Quantification  | N/A  |
+| Platform  | Keras/Tensorflow   |
 
 
-### Software Setup:
-To setup the python environment needed to train and run this model, first make sure you install [conda](https://docs.conda.io/en/latest/) package manager, clone this repository, then create the environment as shown below.
-
+### Software Setup
+To set up the Python environment needed to train and run this model:
+1. Install [conda](https://docs.conda.io/en/latest/) package manager.
+2. Clone this repository.
+3. Create the environment as shown below.
 ```bash
    conda env create -f environment.yml -n mt-cnn
    conda activate mt-cnn
    ```
-### Data Setup:
-To download the  data needed to train and test the model, and the trained model files, you should create an account first on the Model and Data Clearinghouse [MoDac](modac.cancer.gov).
+### Data Setup
+To download the data needed to train and test the model, and the trained model files:
+1. Create an account on the Model and Data Clearinghouse ([MoDaC](modac.cancer.gov)).
+2. Run the script [data_handler.py](./data_hander.py), which will do the following: 
+   * Download the GDC pathology reports from MoDaC.
+   * Split the data into training/validation/test datasets.
+   * Clean up punctuation and unecessary tokens from the reports.
+   * Train a word embedding network to convert every word in the reports to an embedding vector of size 300.
+   * Use the trained word embedding model to encode every report into a numpy array of size (1500 * 300).
+   * Generate numpy arrays for the training/validation/test datasets.
 
-Then run the script [data_handler.py](./data_hander.py) which will do the following: 
-* Download the GDC pathology reports from MoDac
-* Split the data into training/validation/test datasets
-* Clean up punctuation and unecessary tokens from the reports
-* Train a word embedding network to convert every word in the reports to an embedding vector of size 300
-* Use the trained word embedding model to encode every report into a numpy array of size (1500 * 300)
-* Generate numpy arrays for the training/validation/test datasets.
+For more information about the original, cleaned, and generated data, refer to the README.txt file that will be downloaded in the ./data directory.
 
-More information about the original, cleaned, and generated data can be bound in the README.txt file that will be downloaded in the ./data directory.
+### Training
 
-### Training:
-
-To train a MT-CNN model with the sample data, execute the script `mt_cnn_exp.py`. This script calls MT-CNN implementation in `keras_mt_shared_cnn.py`
+To train a MT-CNN model with the sample data, execute the script `mt_cnn_exp.py`. This script calls MT-CNN implementation in `keras_mt_shared_cnn.py`.
 
 ```
 $ python mt_cnn_exp.py
