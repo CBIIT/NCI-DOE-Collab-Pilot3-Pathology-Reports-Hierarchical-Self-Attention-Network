@@ -13,6 +13,7 @@ The provided untrained model can be used by data scientists to be trained on the
 
 ### Uniqueness
 Classification of unstructured text is a classical problem in natural language processing. The community has developed state-of-the-art models like BERT, Bio-BERT, and Transformer. This model has the advantage of working on a relatively long report (that is, over 400 words) and shows scalability in terms of accuracy and speed with relatively small number of unstructured pathology reports. 
+(Question: Are you saying it should be scalable to a larger number of reports?)
 
 ### Components
 * Original and processed training, validation, and test data.
@@ -20,9 +21,10 @@ Classification of unstructured text is a classical problem in natural languag
 * Trained model weights and topology to be used in inference.
 
 ### Completed Model Trans_Validate Template
+(Question: When I formatted this info as a table, I added generic column headings. Are these column headings ok?)
 | Attribute  | Value |
 | ------------- | ------------- |
-| Model Developer/POC  | Hong-Jun Yoon |
+| Model Developer / Point of Contact  | Hong-Jun Yoon |
 | Model Name | MT-CNN |
 | Inputs  | Indices of tokenized text  |
 | Outputs  | softmax  |
@@ -34,7 +36,7 @@ Classification of unstructured text is a classical problem in natural languag
 ### Software Setup
 To set up the Python environment needed to train and run this model:
 1. Install [conda](https://docs.conda.io/en/latest/) package manager.
-2. Clone this repository.
+2. Clone this repository. (Question: Is this step referring to this NCI-DOE-Collab-Pilot3-Multi-Task-Convolutional_Neural_Networks repository?)
 3. Create the environment as shown below.
 ```bash
    conda env create -f environment.yml -n mt-cnn
@@ -51,11 +53,13 @@ To download the data needed to train and test the model, and the trained model f
    * Use the trained word embedding model to encode every report into a numpy array of size (1500 * 300).
    * Generate numpy arrays for the training/validation/test datasets.
 
-For more information about the original, cleaned, and generated data, refer to the README.txt file that will be downloaded in the ./data directory.
+For more information about the original, cleaned, and generated data, refer to the README.txt file that will be downloaded in the ./data directory. (Questions: Who or what downloads it? Also, would it be more accurate to say generated rather than downloaded?)
 
 ### Training
 
-To train a MT-CNN model with the sample data, execute the script `mt_cnn_exp.py`. This script calls MT-CNN implementation in `keras_mt_shared_cnn.py`.
+To train a MT-CNN model with the sample data, execute the script `mt_cnn_exp.py`. This script calls MT-CNN implementation in `keras_mt_shared_cnn.py`. 
+
+(Questions: The  script in the Data Setup section has a link, but the two .py files mentioned in this section don't have links. Is that intentional? Also, is the content below some example output from running the script?)
 
 ```
 $ python mt_cnn_exp.py
@@ -111,7 +115,13 @@ task histology test f-score: 0.8003,0.4069
 ```
 
 ### Disclaimer
-UT-BATTELLE, LLC AND THE GOVERNMENT MAKE NO REPRESENTATIONS AND DISCLAIM ALL WARRANTIES, BOTH EXPRESSED AND IMPLIED. THERE ARE NO EXPRESS OR IMPLIED WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE, OR THAT THE USE OF THE SOFTWARE WILL NOT INFRINGE ANY PATENT, COPYRIGHT, TRADEMARK, OR OTHER PROPRIETARY RIGHTS, OR THAT THE SOFTWARE WILL ACCOMPLISH THE INTENDED RESULTS OR THAT THE SOFTWARE OR ITS USE WILL NOT RESULT IN INJURY OR DAMAGE. THE USER ASSUMES RESPONSIBILITY FOR ALL LIABILITIES, PENALTIES, FINES, CLAIMS, CAUSES OF ACTION, AND COSTS AND EXPENSES, CAUSED BY, RESULTING FROM OR ARISING OUT OF, IN WHOLE OR IN PART THE USE, STORAGE OR DISPOSAL OF THE SOFTWARE.
+UT-Battelle, LLC and the government make no representations and disclaim all warranties, both expressed and implied. There are no express or implied warranties:
+* Of merchantability or fitness for a particular purpose, 
+* Or that the use of the software will not infringe any patent, copyright, trademark, or other proprietary rights, 
+* Or that the software will accomplish the intended results, 
+* Or that the software or its use will not result in injury or damage. 
+
+The user assumes responsibility for all liabilities, penalties, fines, claims, causes of action, and costs and expenses, caused by, resulting from or arising out of, in whole or in part the use, storage or disposal of the software.
 
 
 ### Acknowledgments
