@@ -13,16 +13,18 @@ The provided untrained model can be used by data scientists to be trained on the
 
 ### Uniqueness
 Classification of unstructured text is a classical problem in natural language processing. The community has developed state-of-the-art models like BERT, Bio-BERT, and Transformer. This model has the advantage of working on a relatively long report (that is, over 400 words) and shows scalability in terms of accuracy and speed with relatively small number of unstructured pathology reports. 
-(Question: Are you saying it should be scalable to a larger number of reports?)
+_**(Question: Are you saying it should be scalable to a larger number of reports?)**_
 
 ### Components
 * Original and processed training, validation, and test data.
 * Untrained neural network model.
 * Trained model weights and topology to be used in inference.
 
+_**Suggestion - let's move this technical information (below) to a Technical ReadME like our other repos.**_
+
 ### Completed Model Trans_Validate Template
-(Question: When I formatted this info as a table, I added generic column headings. Are these column headings ok?)
-| Attribute  | Value |
+_**(Question: When I formatted this info as a table, I added generic column headings. Are these column headings ok?)_
+| Attribute  | Value |**
 | ------------- | ------------- |
 | Model Developer / Point of Contact  | Hong-Jun Yoon |
 | Model Name | MT-CNN |
@@ -36,7 +38,7 @@ Classification of unstructured text is a classical problem in natural languag
 ### Software Setup
 To set up the Python environment needed to train and run this model:
 1. Install [conda](https://docs.conda.io/en/latest/) package manager.
-2. Clone this repository. (Question: Is this step referring to this NCI-DOE-Collab-Pilot3-Multi-Task-Convolutional_Neural_Networks repository?)
+2. Clone this repository. **_(Question: Is this step referring to this NCI-DOE-Collab-Pilot3-Multi-Task-Convolutional_Neural_Networks repository?)_**
 3. Create the environment as shown below.
 ```bash
    conda env create -f environment.yml -n mt-cnn
@@ -53,13 +55,13 @@ To download the data needed to train and test the model, and the trained model f
    * Use the trained word embedding model to encode every report into a numpy array of size (1500 * 300).
    * Generate numpy arrays for the training/validation/test datasets.
 
-For more information about the original, cleaned, and generated data, refer to the README.txt file that will be downloaded in the ./data directory. (Questions: Who or what downloads it? Also, would it be more accurate to say generated rather than downloaded?)
+For more information about the original, cleaned, and generated data, refer to the README.txt file that will be downloaded in the ./data directory. **_(Questions: Who or what downloads it? Also, would it be more accurate to say generated rather than downloaded?)_**
 
 ### Training
 
 To train a MT-CNN model with the sample data, execute the script `mt_cnn_exp.py`. This script calls MT-CNN implementation in `keras_mt_shared_cnn.py`. 
 
-(Questions: The  script in the Data Setup section has a link, but the two .py files mentioned in this section don't have links. Is that intentional? Also, is the content below some example output from running the script?)
+_**(Questions: The  script in the Data Setup section has a link, but the two .py files mentioned in this section don't have links. Is that intentional? Also, is the content below some example output from running the script?)**_
 
 ```
 $ python mt_cnn_exp.py
