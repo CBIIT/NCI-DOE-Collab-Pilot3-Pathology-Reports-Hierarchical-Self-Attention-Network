@@ -38,7 +38,7 @@ Classification of unstructured text is a classical problem in natural languag
 ### Software Setup
 To set up the Python environment needed to train and run this model:
 1. Install [conda](https://docs.conda.io/en/latest/) package manager.
-2. Clone this repository. &#x1F534;**_(Question: Is this step referring to this NCI-DOE-Collab-Pilot3-Multi-Task-Convolutional_Neural_Networks repository?)_**
+2. Clone this repository. &#x1F534;**_(Question: Is this step referring to the repository that contains this readme file? If so, we could specifically name it here, in case someone takes this readme out of context.)_**
 3. Create the environment as shown below.
 ```bash
    conda env create -f environment.yml -n mt-cnn
@@ -46,14 +46,14 @@ To set up the Python environment needed to train and run this model:
    ```
 ### Data Setup
 To download the data needed to train and test the model, and the trained model files:
-1. Create an account on the Model and Data Clearinghouse ([MoDaC](modac.cancer.gov)).
-2. Run the script [data_handler.py](./data_hander.py), which will do the following: 
-   * Download the GDC pathology reports from MoDaC.
-   * Split the data into training/validation/test datasets.
-   * Clean up punctuation and unecessary tokens from the reports.
-   * Train a word embedding network to convert every word in the reports to an embedding vector of size 300.
-   * Use the trained word embedding model to encode every report into a numpy array of size (1500 * 300).
-   * Generate numpy arrays for the training/validation/test datasets.
+1. Create an account on the Model and Data Clearinghouse ([MoDaC](https://modac.cancer.gov)).
+2. Run the script [data_handler.py](./data_hander.py), which does the following: 
+   * Downloads the Genomic Data Commons (GDC) pathology reports from MoDaC.
+   * Splits the data into training/validation/test datasets.
+   * Cleans up punctuation and unecessary tokens from the reports.
+   * Trains a word embedding network to convert every word in the reports to an embedding vector of size 300.
+   * Uses the trained word embedding model to encode every report into a numpy array of size (1500 * 300).
+   * Generates numpy arrays for the training/validation/test datasets.
 
 For more information about the original, cleaned, and generated data, refer to the README.txt file that will be downloaded in the ./data directory. &#x1F534;**_(Questions: Who or what downloads it? Also, would it be more accurate to say generated rather than downloaded?)_**
 
