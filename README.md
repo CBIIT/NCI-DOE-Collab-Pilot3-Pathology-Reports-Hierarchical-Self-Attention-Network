@@ -23,8 +23,8 @@ Classification of unstructured text is a classical problem in natural languag
 &#x1F534;_**Suggestion - let's move this technical information (below) to a Technical ReadME like our other repos.**_
 
 ### Completed Model Trans_Validate Template
-&#x1F534;_**(Question: When I formatted this info as a table, I added generic column headings. Are these column headings ok?)_
-| Attribute  | Value |**
+&#x1F534;_**(Question: When I formatted this info as a table, I added generic column headings. Are these column headings ok?)**_
+| Attribute  | Value |
 | ------------- | ------------- |
 | Model Developer / Point of Contact  | Hong-Jun Yoon |
 | Model Name | MT-CNN |
