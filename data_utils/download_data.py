@@ -13,7 +13,7 @@ reports_url = os.path.join( modac_collection_path, reports)
 print(metadata_url)
 print(reports_url)
 
-get_file('histo_metadata.csv', metadata_url, datadir = 'modac_data')
-get_file('features_full.tar.gz', reports_url, datadir = 'modac_data', untar = True)
+get_file('histo_metadata.csv', metadata_url, datadir = 'data')
+get_file('features_full.tar.gz', reports_url, datadir = 'data', untar = True)
 
 
