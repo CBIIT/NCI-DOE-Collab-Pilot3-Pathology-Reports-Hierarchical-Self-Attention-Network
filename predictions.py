@@ -2,7 +2,7 @@ import argparse
 import json
 import pickle
 import numpy as np
-from data_handler import clearup
+from data_utils.data_handler import clearup
 from keras.models import load_model
 import pandas as pd
 def parse_arguments():
@@ -43,7 +43,7 @@ def originalLabels(filename):
 
 def mtcnnPredict(filename,word2idx,vocab,siteIdtoLabel,histologyIdtoLabel, args):
     vec = vectorSingle(filename, word2idx, vocab, args)
-    model = load_model('mtcnn/mt_cnn_model.h5')
+    model = load_model('mt_cnn_model.h5')
     y_preds = model.predict(vec)
     sitePred = np.argmax(y_preds[0], 1)
     histoPred = np.argmax(y_preds[1], 1)
