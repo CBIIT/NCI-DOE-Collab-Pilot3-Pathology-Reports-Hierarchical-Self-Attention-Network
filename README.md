@@ -1,39 +1,45 @@
 ## Multi Task-Convolutional Neural Networks (MT-CNN)
 
-##### Author: Biomedical Sciences, Engineering and Computing Group, Computer Sciences and Engineering Division, Oak Ridge National Laboratory
+##### Author: Biomedical Sciences, Engineering, and Computing (BSEC) Group; Computer Sciences and Engineering Division; Oak Ridge National Laboratory
 
-### Description:
-MT-CNN is a CNN for Natural Language Processing (NLP) and Information Extraction from free-form texts. BSEC group designed the model for information extraction from cancer pathology reports.
+### Description
+MT-CNN is a CNN for natural language processing (NLP) and information Extraction from free-form texts. BSEC group designed the model for information extraction from cancer pathology reports.
 
-### User Community:	
-Data scientist interested in classifying free form texts (e.g. pathology reports, clinical trials, abstracts, etc.) 
+### User Community
+Data scientists interested in classifying free form texts (such as pathology reports, clinical trials, abstracts, and so on). 
 
-### Usability:	
-The provided untrained model can be used by a data scientist to be trained on their own data, or use the trained model to classify the provided test samples. The provided scripts use pathology report that has been downloaded, converted to txt, cleaned and preprocessed from the Genomics Data Commons. Here is an example [report](https://portal.gdc.cancer.gov/legacy-archive/files/a9a42650-4613-448d-895e-4f904285f508).
+### Usability
+The provided untrained model can be used by data scientists to be trained on their own data, or use the trained model to classify the provided test samples. The provided scripts use a pathology report that has been downloaded from the Genomics Data Commons, converted to text format, cleaned, and preprocessed. Here is an example [report](https://portal.gdc.cancer.gov/legacy-archive/files/a9a42650-4613-448d-895e-4f904285f508).
 
-### Uniqueness:	
-Classification of unstructured text is a classical problem in natural language processing. There are state of arts models like BERT, Bio-BERT, and Transformer that have been developed by the community. This model have advantage or working on relatively long report (i.e., over 400 words) and shows scalability in terms of accuracy and speed with relatively small number of unstructured pathology reports. 
+### Uniqueness
+Classification of unstructured text is a classical problem in natural language processing. The community has developed state-of-the-art models like BERT, Bio-BERT, and Transformer. This model has the advantage of working on a relatively long report (that is, over 400 words) and shows scalability in terms of accuracy and speed with relatively small number of unstructured pathology reports. 
+&#x1F534;_**(Question: Are you saying it should be scalable to a larger number of reports?)**_
 
-### Components:	
-* Original and processed training, validation, and test data
-* Untrained neural network model
+### Components
+* Original and processed training, validation, and test data.
+* Untrained neural network model.
 * Trained model weights and topology to be used in inference.
 
-
+&#x1F534;_**Suggestion - let's move this technical information (below) to a Technical ReadME like our other repos.**_
 
 ### Completed Model Trans_Validate Template
-Model Developer/POC: Hong-Jun Yoon </br>
-Model Name: MT-CNN </br>
-Inputs: Indices of tokenized text </br>
-Outputs: softmax </br>
-Training Data: sample data available in the repo </br>
-Uncertainty Quantification: N/A </br>
-Platform: Keras/Tensorflow </br>
+&#x1F534;_**(Question: When I formatted this info as a table, I added generic column headings. Are these column headings ok?)**_
+| Attribute  | Value |
+| ------------- | ------------- |
+| Model Developer / Point of Contact  | Hong-Jun Yoon |
+| Model Name | MT-CNN |
+| Inputs  | Indices of tokenized text  |
+| Outputs  | softmax  |
+| Training Data  | sample data available in the repo  |
+| Uncertainty Quantification  | N/A  |
+| Platform  | Keras/Tensorflow   |
 
 
-### Software Setup:
-To setup the python environment needed to train and run this model, first make sure you install [conda](https://docs.conda.io/en/latest/) package manager, clone this repository, then create the environment as shown below.
-
+### Software Setup
+To set up the Python environment needed to train and run this model:
+1. Install [conda](https://docs.conda.io/en/latest/) package manager.
+2. Clone this repository. &#x1F534;**_(Question: Is this step referring to the repository that contains this readme file? If so, we could specifically name it here, in case someone takes this readme out of context.)_**
+3. Create the environment as shown below.
 ```bash
    conda env create -f environment.yml -n mt-cnn
    conda activate mt-cnn
@@ -59,10 +65,25 @@ The script [./data_utils/data_handler.py](./data_utils/data_handler.py) does the
 * Generates numpy arrays for the training/validation/test datasets.
 
 Here is t
+=======
+### Data Setup
+To download the data needed to train and test the model, and the trained model files:
+1. Create an account on the Model and Data Clearinghouse ([MoDaC](https://modac.cancer.gov)).
+2. Run the script [data_handler.py](./data_hander.py), which does the following: 
+   * Downloads the Genomic Data Commons (GDC) pathology reports from MoDaC.
+   * Splits the data into training/validation/test datasets.
+   * Cleans up punctuation and unecessary tokens from the reports.
+   * Trains a word embedding network to convert every word in the reports to an embedding vector of size 300.
+   * Uses the trained word embedding model to encode every report into a numpy array of size (1500 * 300).
+   * Generates numpy arrays for the training/validation/test datasets.
 
-### Training:
+For more information about the original, cleaned, and generated data, refer to the README.txt file that will be downloaded in the ./data directory. &#x1F534;**_(Questions: Who or what downloads it? Also, would it be more accurate to say generated rather than downloaded?)_**
 
-To train a MT-CNN model with the sample data, execute the script `mt_cnn_exp.py`. This script calls MT-CNN implementation in `keras_mt_shared_cnn.py`
+### Training
+
+To train a MT-CNN model with the sample data, execute the script `mt_cnn_exp.py`. This script calls MT-CNN implementation in `keras_mt_shared_cnn.py`. 
+
+&#x1F534;_**(Questions: The  script in the Data Setup section has a link, but the two .py files mentioned in this section don't have links. Is that intentional? Also, is the content below some example output from running the script?)**_
 
 ```
 $ python mt_cnn_exp.py
@@ -118,7 +139,13 @@ task histology test f-score: 0.8003,0.4069
 ```
 
 ### Disclaimer
-UT-BATTELLE, LLC AND THE GOVERNMENT MAKE NO REPRESENTATIONS AND DISCLAIM ALL WARRANTIES, BOTH EXPRESSED AND IMPLIED. THERE ARE NO EXPRESS OR IMPLIED WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE, OR THAT THE USE OF THE SOFTWARE WILL NOT INFRINGE ANY PATENT, COPYRIGHT, TRADEMARK, OR OTHER PROPRIETARY RIGHTS, OR THAT THE SOFTWARE WILL ACCOMPLISH THE INTENDED RESULTS OR THAT THE SOFTWARE OR ITS USE WILL NOT RESULT IN INJURY OR DAMAGE. THE USER ASSUMES RESPONSIBILITY FOR ALL LIABILITIES, PENALTIES, FINES, CLAIMS, CAUSES OF ACTION, AND COSTS AND EXPENSES, CAUSED BY, RESULTING FROM OR ARISING OUT OF, IN WHOLE OR IN PART THE USE, STORAGE OR DISPOSAL OF THE SOFTWARE.
+UT-Battelle, LLC and the government make no representations and disclaim all warranties, both expressed and implied. There are no express or implied warranties:
+* Of merchantability or fitness for a particular purpose, 
+* Or that the use of the software will not infringe any patent, copyright, trademark, or other proprietary rights, 
+* Or that the software will accomplish the intended results, 
+* Or that the software or its use will not result in injury or damage. 
+
+The user assumes responsibility for all liabilities, penalties, fines, claims, causes of action, and costs and expenses, caused by, resulting from or arising out of, in whole or in part the use, storage or disposal of the software.
 
 
 ### Acknowledgments
