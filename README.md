@@ -39,17 +39,26 @@ To setup the python environment needed to train and run this model, first make s
    conda activate mt-cnn
    ```
 ### Data Setup:
+
+The data setup goes through multiple steps. Run all the commands below from the top level directory of the repository.
+
+1- Download reports from modac.cancer.gov:
+
 To download the  data needed to train and test the model, and the trained model files, you should create an account first on the Model and Data Clearinghouse [MoDac](modac.cancer.gov).
+Then run the script  [./data_utils/download_data.py](./data_utils/download_data.py).
 
-Then run the script [data_handler.py](./data_hander.py) which will do the following: 
-* Download the GDC pathology reports from MoDac
-* Split the data into training/validation/test datasets
-* Clean up punctuation and unecessary tokens from the reports
-* Train a word embedding network to convert every word in the reports to an embedding vector of size 300
-* Use the trained word embedding model to encode every report into a numpy array of size (1500 * 300)
-* Generate numpy arrays for the training/validation/test datasets.
+2- Generate trainign/validaton/test datasets:
+The script  [./data_utils/trainTestSplitMetaData.py](./data_utils/trainTestSplitMetaData.py) splits the data into training/validation/test datasets and mapps the site and histology to integer categories. 
 
-More information about the original, cleaned, and generated data can be bound in the README.txt file that will be downloaded in the ./data directory.
+
+3- Process reports and generate features:
+The script [./data_utils/data_handler.py](./data_utils/data_handler.py) does the following 
+* Cleans up punctuation and unecessary tokens from the reports
+* Generates a dictionary that maps words in the corpus with a least five appearances to a unique index. 
+* Uses the word to index dictionary to encode every report into a numpy vector of size 1500, where 1500 is the maximum number of words in a pathology report. Every element in that array represent the index of the word in the corpus.
+* Generates numpy arrays for the training/validation/test datasets.
+
+Here is t
 
 ### Training:
 
