@@ -50,10 +50,11 @@ The data setup goes through multiple steps. Run all the commands below from the 
 
 1- Download reports from modac.cancer.gov:
 
-To download the  data needed to train and test the model, and the trained model files, you should create an account first on the Model and Data Clearinghouse [MoDac](modac.cancer.gov).
-Then run the script  [./data_utils/download_data.py](./data_utils/download_data.py).
+To download the  reports needed to train and test the model, and the trained model file, you should first create an account on the Model and Data Clearinghouse [MoDac](modac.cancer.gov).
 
-2- Generate trainign/validaton/test datasets:
+To download the reports and their corresponding metadata, run the script  [./data_utils/download_data.py](./data_utils/download_data.py).
+
+2- Generate training/validaton/test datasets:
 The script  [./data_utils/trainTestSplitMetaData.py](./data_utils/trainTestSplitMetaData.py) splits the data into training/validation/test datasets and mapps the site and histology to integer categories. 
 
 
@@ -62,28 +63,15 @@ The script [./data_utils/data_handler.py](./data_utils/data_handler.py) does the
 * Cleans up punctuation and unecessary tokens from the reports
 * Generates a dictionary that maps words in the corpus with a least five appearances to a unique index. 
 * Uses the word to index dictionary to encode every report into a numpy vector of size 1500, where 1500 is the maximum number of words in a pathology report. Every element in that array represent the index of the word in the corpus.
-* Generates numpy arrays for the training/validation/test datasets.
+* Generates the corresponding numpy arrays for the training/validation/test datasets.
 
-Here is t
-=======
-### Data Setup
-To download the data needed to train and test the model, and the trained model files:
-1. Create an account on the Model and Data Clearinghouse ([MoDaC](https://modac.cancer.gov)).
-2. Run the script [data_handler.py](./data_hander.py), which does the following: 
-   * Downloads the Genomic Data Commons (GDC) pathology reports from MoDaC.
-   * Splits the data into training/validation/test datasets.
-   * Cleans up punctuation and unecessary tokens from the reports.
-   * Trains a word embedding network to convert every word in the reports to an embedding vector of size 300.
-   * Uses the trained word embedding model to encode every report into a numpy array of size (1500 * 300).
-   * Generates numpy arrays for the training/validation/test datasets.
 
-For more information about the original, cleaned, and generated data, refer to the README.txt file that will be downloaded in the ./data directory. &#x1F534;**_(Questions: Who or what downloads it? Also, would it be more accurate to say generated rather than downloaded?)_**
+For more information about the original, cleaned, and generated data, refer to this [README](./data/README.md) file. Note all artifacts will be generated after you run the data setup commands above.
 
 ### Training
 
-To train a MT-CNN model with the sample data, execute the script `mt_cnn_exp.py`. This script calls MT-CNN implementation in `keras_mt_shared_cnn.py`. 
+To train a MT-CNN model with the sample data, execute the script [mt_cnn_exp.py](./mt_cnn_exp.py). This script calls MT-CNN implementation in [keras_mt_shared_cnn.py](./keras_mt_shared_cnn.py). 
 
-&#x1F534;_**(Questions: The  script in the Data Setup section has a link, but the two .py files mentioned in this section don't have links. Is that intentional? Also, is the content below some example output from running the script?)**_
 
 ```
 $ python mt_cnn_exp.py
@@ -128,15 +116,49 @@ None
 Train on 4579 samples, validate on 509 samples
 .....
 .....
-Epoch 23/100
- - 6s - loss: 0.6748 - site_loss: 0.0386 - histology_loss: 0.2119 - site_acc: 0.9891 - histology_acc: 0.9378 - val_loss: 1.4682 - val_site_loss: 0.1636 - val_histology_loss: 0.8718 - val_site_acc: 0.9489 - val_histology_acc: 0.8075
+Epoch 00024: val_loss did not improve from 1.37346
+Epoch 25/100
+ - 19s - loss: 0.6999 - site_loss: 0.0430 - histology_loss: 0.2128 - site_acc: 0.9886 - histology_acc: 0.9393 - val_loss: 1.5683 - val_site_loss: 0.1621 - val_histology_loss: 0.9508 - val_site_acc: 0.9607 - val_histology_acc: 0.7937
 
-Epoch 00023: val_loss did not improve from 1.38362
-Prediction on test set
-task site test f-score: 0.9654,0.9381
-task histology test f-score: 0.8003,0.4069
+Epoch 00025: val_loss did not improve from 1.37346
+Prediction on test set 
+task site test f-score: 0.9599,0.9389
+task histology test f-score: 0.8184,0.4192
+```
+
+### Inference on test dataset:
+To test the trained model in inference, first download the trained model by running this (script) [./data_utils/download_model.py]. 
+
+Then run the script (mt_cnn_infer.py)[mt_cnn_infer.py] which performs the following:
+* Performs inference on the test dataset
+* Reports the micro, macro F1 scores of the model on the test dataset
+
+
+```bash
+   python mt_cnn_infer.py
+   .....
+   Prediction on test set 
+   task site test f-score: 0.9662,0.9421
+   task histology test f-score: 0.8168,0.4098
+   ```
+
+### Inference on a single report:
+To run model in inference model for a single report, use the script  (predictions.py_[./predictions.py] which accepts as input a single txt report, run inference, and displays the true labels and the inferenced labels. There is a default report to be used by the script to prediciton.
 
 ```
+   python predictions.py
+   
+   MTCNN Prediction
+   prostate
+   8140.0
+   8141.
+   Original Labels
+         filename                                             site            histology
+   3555  TCGA-2A-AAYO.3889AA76-F350-4DA4-987B-79E8D2349...    "prostate"      8140.0
+
+```
+
+
 
 ### Disclaimer
 UT-Battelle, LLC and the government make no representations and disclaim all warranties, both expressed and implied. There are no express or implied warranties:
