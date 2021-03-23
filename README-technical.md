@@ -1,4 +1,5 @@
-&#x1F534;_**Suggestion - let's move this technical information (below) to a Technical ReadME like our other repos.**_
+### Model Description
+Multi Task-Convolutional Neural Networks (MT-CNN) is a CNN for Natural Language Processing (NLP) and information extraction from free-form texts. The Biomedical Sciences, Engineering, and Computing (BSEC) group designed the model for information extraction from cancer pathology reports.
 
 ### Completed Model Trans_Validate Template
 &#x1F534;_**(Question: When I formatted this info as a table, I added generic column headings. Are these column headings ok?)**_
@@ -12,46 +13,36 @@
 | Uncertainty Quantification  | N/A  |
 | Platform  | Keras/Tensorflow   |
 
-
-
-
 ### Software Setup
 To set up the Python environment needed to train and run this model:
 1. Install [conda](https://docs.conda.io/en/latest/) package manager.
-2. Clone this repository. &#x1F534;**_(Question: Is this step referring to the repository that contains this readme file? If so, we could specifically name it here, in case someone takes this readme out of context.)_**
+2. Clone this repository.
 3. Create the environment as shown below.
 ```bash
    conda env create -f environment.yml -n mt-cnn
    conda activate mt-cnn
    ```
-### Data Setup:
+### Data Setup
 
-The data setup goes through multiple steps. Run all the commands below from the top level directory of the repository.
+To set up the data, run the following commands from the top level directory of the repository.
+1. Download the reports needed to train and test the model, and the trained model file:
+   1. Create an account on the Model and Data Clearinghouse ([MoDaC](https://modac.cancer.gov)). 
+   2. Run the script  [./data_utils/download_data.py](./data_utils/download_data.py). This script downloads the reports and their corresponding metadata from MoDaC.
+   3. When prompted by the training and test scripts, enter your MoDaC credentials.
+2. Generate training/validaton/test datasets by running the script [./data_utils/trainTestSplitMetaData.py](./data_utils/trainTestSplitMetaData.py). This script splits the data into training/validation/test datasets and maps the site and histology to integer categories. 
+3. Process reports and generate features by running the script [./data_utils/data_handler.py](./data_utils/data_handler.py). This script does the following: 
+   * Cleans up punctuation and unecessary tokens from the reports.
+   * Generates a dictionary that maps words in the corpus with a least five appearances to a unique index. 
+   * Uses the word to index dictionary to encode every report into a numpy vector of size 1500, where 1500 is the maximum number of words in a pathology report. Every element in that array represents the index of the word in the corpus.
+   * Generates the corresponding numpy arrays for the training/validation/test datasets.
 
-1- Download reports from modac.cancer.gov:
-
-To download the  reports needed to train and test the model, and the trained model file, you should first create an account on the Model and Data Clearinghouse [MoDac](modac.cancer.gov).
-
-To download the reports and their corresponding metadata, run the script  [./data_utils/download_data.py](./data_utils/download_data.py).
-
-2- Generate training/validaton/test datasets:
-The script  [./data_utils/trainTestSplitMetaData.py](./data_utils/trainTestSplitMetaData.py) splits the data into training/validation/test datasets and mapps the site and histology to integer categories. 
-
-
-3- Process reports and generate features:
-The script [./data_utils/data_handler.py](./data_utils/data_handler.py) does the following 
-* Cleans up punctuation and unecessary tokens from the reports
-* Generates a dictionary that maps words in the corpus with a least five appearances to a unique index. 
-* Uses the word to index dictionary to encode every report into a numpy vector of size 1500, where 1500 is the maximum number of words in a pathology report. Every element in that array represent the index of the word in the corpus.
-* Generates the corresponding numpy arrays for the training/validation/test datasets.
-
-
-For more information about the original, cleaned, and generated data, refer to this [README](./data/README.md) file. Note all artifacts will be generated after you run the data setup commands above.
+For more information about the original, cleaned, and generated data, refer to this [README](./data/README.md) file. The system generates all artifacts after you run the data setup commands above.
 
 ### Training
 
-To train a MT-CNN model with the sample data, execute the script [mt_cnn_exp.py](./mt_cnn_exp.py). This script calls MT-CNN implementation in [keras_mt_shared_cnn.py](./keras_mt_shared_cnn.py). 
+To train an MT-CNN model with the sample data, execute the script [mt_cnn_exp.py](./mt_cnn_exp.py). This script calls MT-CNN implementation in [keras_mt_shared_cnn.py](./keras_mt_shared_cnn.py). 
 
+Here is example output from running the script:
 
 ```
 $ python mt_cnn_exp.py
@@ -106,13 +97,14 @@ task site test f-score: 0.9599,0.9389
 task histology test f-score: 0.8184,0.4192
 ```
 
-### Inference on test dataset:
-To test the trained model in inference, first download the trained model by running this (script) [./data_utils/download_model.py]. 
+### Inference on Test Dataset
+To test the trained model in inference:
+1. Download the trained model by running the script (download_model.py)[./data_utils/download_model.py]. 
+2. Run the script (mt_cnn_infer.py)[mt_cnn_infer.py] which performs the following:
+   * Performs inference on the test dataset.
+   * Reports the micro, macro F1 scores of the model on the test dataset.
 
-Then run the script (mt_cnn_infer.py)[mt_cnn_infer.py] which performs the following:
-* Performs inference on the test dataset
-* Reports the micro, macro F1 scores of the model on the test dataset
-
+Here is example output from running the script:
 
 ```bash
    python mt_cnn_infer.py
@@ -122,8 +114,12 @@ Then run the script (mt_cnn_infer.py)[mt_cnn_infer.py] which performs the follow
    task histology test f-score: 0.8168,0.4098
    ```
 
-### Inference on a single report:
-To run model in inference model for a single report, use the script  (predictions.py_[./predictions.py] which accepts as input a single txt report, run inference, and displays the true labels and the inferenced labels. There is a default report to be used by the script to prediciton.
+### Inference on a Single Report
+To test the model in inference model for a single report, run the script (predictions.py_[./predictions.py]. &#x1F534;_**(Question: The word "model" is mentioned twice. Is that intentional?)**_
+
+This script accepts as input a single txt report, runs inference, and displays the true labels and the inferenced labels. The script uses a default report for prediction. &#x1F534;_**(Questions: Do we want to mention the name of the default report? Does the script use that default report only when no report is specified?)**_
+
+Here is example output from running the script:
 
 ```
    python predictions.py
@@ -137,8 +133,6 @@ To run model in inference model for a single report, use the script  (prediction
    3555  TCGA-2A-AAYO.3889AA76-F350-4DA4-987B-79E8D2349...    "prostate"      8140.0
 
 ```
-
-
 
 ### Disclaimer
 UT-Battelle, LLC and the government make no representations and disclaim all warranties, both expressed and implied. There are no express or implied warranties:
