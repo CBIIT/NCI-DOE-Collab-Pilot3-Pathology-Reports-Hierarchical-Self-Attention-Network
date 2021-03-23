@@ -1,9 +1,7 @@
 ## Multi Task-Convolutional Neural Networks (MT-CNN)
 
-##### Author: Biomedical Sciences, Engineering, and Computing (BSEC) Group; Computer Sciences and Engineering Division; Oak Ridge National Laboratory
-
 ### Description
-MT-CNN is a CNN for natural language processing (NLP) and information extraction from free-form texts. BSEC group designed the model for information extraction from cancer pathology reports. &#x1F534;_**(Questions: The name "Multi Task-Convolutional Neural Networks" is plural but "MT-CNN" is treated as singular in this paragraph. Which is correct? Also, since MT-CNN is a type of CNN, should it be "Multitasking Convolutional Neural Networks"?)**_
+MT-CNN is a CNN for natural language processing (NLP) and information extraction from free-form texts. The Biomedical Sciences, Engineering, and Computing (BSEC) group designed the model for information extraction from cancer pathology reports. &#x1F534;_**(Questions: The name "Multi Task-Convolutional Neural Networks" is plural but "MT-CNN" is treated as singular in this paragraph. Which is correct? Also, since MT-CNN is a type of CNN, should it be "Multitasking Convolutional Neural Networks"?)**_
 
 ### User Community
 Data scientists interested in classifying free form texts (such as pathology reports, clinical trials, abstracts, and so on). 
@@ -23,3 +21,5 @@ The following components are in the Model and Data Clearinghouse ([MoDaC](https:
 
 ### Technical Details
 Refer to this [README](README-technical.md). 
+
+### Author: Biomedical Sciences, Engineering, and Computing (BSEC) Group; Computer Sciences and Engineering Division; Oak Ridge National Laboratory
