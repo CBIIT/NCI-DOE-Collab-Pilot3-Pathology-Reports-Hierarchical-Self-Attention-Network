@@ -22,4 +22,5 @@ The following components are in the Model and Data Clearinghouse ([MoDaC](https:
 ### Technical Details
 Refer to this [README](README-technical.md). 
 
-### Author: Biomedical Sciences, Engineering, and Computing (BSEC) Group; Computer Sciences and Engineering Division; Oak Ridge National Laboratory
+### Author
+Biomedical Sciences, Engineering, and Computing (BSEC) Group; Computer Sciences and Engineering Division; Oak Ridge National Laboratory
