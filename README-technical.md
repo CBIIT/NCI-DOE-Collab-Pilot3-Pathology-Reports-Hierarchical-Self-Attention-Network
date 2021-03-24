@@ -1,5 +1,5 @@
 ### Model Description
-Multi Task-Convolutional Neural Networks (MT-CNN) is a CNN for Natural Language Processing (NLP) and information extraction from free-form texts. The Biomedical Sciences, Engineering, and Computing (BSEC) group designed the model for information extraction from cancer pathology reports.
+Multitask Convolutional Neural Network (MT-CNN) is a CNN for natural language processing (NLP) and information extraction from free-form texts. The Biomedical Sciences, Engineering, and Computing (BSEC) group designed the model for information extraction from cancer pathology reports.
 
 ### Completed Model Trans_Validate Template
 | Attribute  | Value |
