@@ -2,7 +2,6 @@
 Multi Task-Convolutional Neural Networks (MT-CNN) is a CNN for Natural Language Processing (NLP) and information extraction from free-form texts. The Biomedical Sciences, Engineering, and Computing (BSEC) group designed the model for information extraction from cancer pathology reports.
 
 ### Completed Model Trans_Validate Template
-&#x1F534;_**(Question: When I formatted this info as a table, I added generic column headings. Are these column headings ok?)**_
 | Attribute  | Value |
 | ------------- | ------------- |
 | Model Developer / Point of Contact  | Hong-Jun Yoon |
