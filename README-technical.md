@@ -114,11 +114,9 @@ Here is example output from running the script:
    ```
 
 ### Inference on a Single Report
-To test the model in inference model for a single report, run the script (predictions.py_[./predictions.py]. &#x1F534;_**(Question: The word "model" is mentioned twice. Is that intentional?)**_
+To test the model in inference mode for a single report, run the script (predictions.py_[./predictions.py]. 
 
-This script accepts as input a single txt report, runs inference, and displays the true labels and the inferenced labels. The script uses a default report for prediction. &#x1F534;_**(Questions: Do we want to mention the name of the default report? Does the script use that default report only when no report is specified?)**_
-
-Here is example output from running the script:
+This script accepts as input a single text report, runs inference, and displays the true labels and the inferenced labels. If no report is specified, the script uses a default report for prediction, as in the following example output: 
 
 ```
    python predictions.py
