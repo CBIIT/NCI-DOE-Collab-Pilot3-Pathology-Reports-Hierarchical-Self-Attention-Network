@@ -1,16 +1,16 @@
 ### Model Description
-Multitask Convolutional Neural Network (MT-CNN) is a CNN for natural language processing (NLP) and information extraction from free-form texts. This model extracts information from cancer pathology reports.
+A hierarchical self attention network is a deep learning model composed of hierarchies where the computationally expensive RNN layers are replaced with self-attention mechanisms. The model has two "hierarchies". The lower hierarchy takes in one sentence at a time, broken into word embeddings. This hierarchy outputs a weighted sentence embedding based on the words in the sentence that are most relevant to the classification. The upper hierarchy takes in one document at a time, broken into the sentence embeddings from the lower hierarchy. This hierarchy outputs a weighted document embedding based on the sentences in the document that are most relevant to the classification. Dropout is applied to this final document embedding, and it is then fed into a softmax classifier. 
 
 ### Completed Model Trans_Validate Template
 | Attribute  | Value |
 | ------------- | ------------- |
 | Model Developer / Point of Contact  | Hong-Jun Yoon |
-| Model Name | MT-CNN |
+| Model Name | HiSAN |
 | Inputs  | Indices of tokenized text  |
-| Outputs  | softmax  |
+| Outputs  | classification, softmax  |
 | Training Data  | sample data available in the repo  |
 | Uncertainty Quantification  | N/A  |
-| Platform  | Keras/Tensorflow   |
+| Platform  | TensorFlow   |
 
 ### Software Setup
 To set up the Python environment needed to train and run this model:
@@ -18,8 +18,8 @@ To set up the Python environment needed to train and run this model:
 2. Clone this repository.
 3. Create the environment as shown below.
 ```bash
-   conda env create -f environment.yml -n mt-cnn
-   conda activate mt-cnn
+   conda env create -f environment.yml -n hisan 
+   conda activate hisan 
    ```
 ### Data Setup
 
@@ -39,96 +39,37 @@ For more information about the original, cleaned, and generated data, refer to t
 
 ### Training
 
-To train an MT-CNN model with the sample data, execute the script [mt_cnn_exp.py](./mt_cnn_exp.py). This script calls MT-CNN implementation in [keras_mt_shared_cnn.py](./keras_mt_shared_cnn.py). 
+To train an HiSAN  model with the sample data, execute the script [tf_mthisan.py](./tf_mthisan.py). 
 
 Here is example output from running the script:
 
 ```
-$ python mt_cnn_exp.py
-Using TensorFlow backend.
-....
-Number of classes:  [25, 117]
-Model file:  mt_cnn_model.h5
-__________________________________________________________________________________________________
-Layer (type)                    Output Shape         Param #     Connected to                     
-==================================================================================================
-Input (InputLayer)              (None, 1500)         0                                            
-__________________________________________________________________________________________________
-embedding (Embedding)           (None, 1500, 300)    6948900     Input[0][0]                      
-__________________________________________________________________________________________________
-0_thfilter (Conv1D)             (None, 1500, 100)    90100       embedding[0][0]                  
-__________________________________________________________________________________________________
-1_thfilter (Conv1D)             (None, 1500, 100)    120100      embedding[0][0]                  
-__________________________________________________________________________________________________
-2_thfilter (Conv1D)             (None, 1500, 100)    150100      embedding[0][0]                  
-__________________________________________________________________________________________________
-global_max_pooling1d_1 (GlobalM (None, 100)          0           0_thfilter[0][0]                 
-__________________________________________________________________________________________________
-global_max_pooling1d_2 (GlobalM (None, 100)          0           1_thfilter[0][0]                 
-__________________________________________________________________________________________________
-global_max_pooling1d_3 (GlobalM (None, 100)          0           2_thfilter[0][0]                 
-__________________________________________________________________________________________________
-concatenate_1 (Concatenate)     (None, 300)          0           global_max_pooling1d_1[0][0]     
-                                                                 global_max_pooling1d_2[0][0]     
-                                                                 global_max_pooling1d_3[0][0]     
-__________________________________________________________________________________________________
-dropout_1 (Dropout)             (None, 300)          0           concatenate_1[0][0]              
-__________________________________________________________________________________________________
-site (Dense)                    (None, 25)           7525        dropout_1[0][0]                  
-__________________________________________________________________________________________________
-histology (Dense)               (None, 117)          35217       dropout_1[0][0]                  
-==================================================================================================
-Total params: 7,351,942
-Trainable params: 7,351,942
-Non-trainable params: 0
-__________________________________________________________________________________________________
-None
-Train on 4579 samples, validate on 509 samples
-.....
-.....
-Epoch 00024: val_loss did not improve from 1.37346
-Epoch 25/100
- - 19s - loss: 0.6999 - site_loss: 0.0430 - histology_loss: 0.2128 - site_acc: 0.9886 - histology_acc: 0.9393 - val_loss: 1.5683 - val_site_loss: 0.1621 - val_histology_loss: 0.9508 - val_site_acc: 0.9607 - val_histology_acc: 0.7937
-
-Epoch 00025: val_loss did not improve from 1.37346
-Prediction on test set 
-task site test f-score: 0.9599,0.9389
-task histology test f-score: 0.8184,0.4192
+$ python tf_mthisan.py 
+training network on 4579 documents, validation on 509 documents
+...
+task 0 test micro: 0.9724842767295597
+task 0 test macro: 0.9320871926345243
+task 1 test micro: 0.7688679245283019
+task 1 test macro: 0.3562566082744524
 ```
 
 ### Inference on Test Dataset
 To test the trained model in inference:
 1. Download the trained model by running the script (download_model.py)[./data_utils/download_model.py]. 
-2. Run the script (mt_cnn_infer.py)[mt_cnn_infer.py] which performs the following:
+2. Run the script (tf_mthisan.py)[./tf_mthisan.py] with the --test option set. The script performs the following:
    * Performs inference on the test dataset.
    * Reports the micro, macro F1 scores of the model on the test dataset.
 
 Here is example output from running the script:
 
 ```bash
-   python mt_cnn_infer.py
+   python tf_mthisan.py --test 
    .....
-   Prediction on test set 
-   task site test f-score: 0.9662,0.9421
-   task histology test f-score: 0.8168,0.4098
-   ```
 
-### Inference on a Single Report
-To test the model in inference mode for a single report, run the script (predictions.py_[./predictions.py]. 
-
-This script accepts as input a single text report, runs inference, and displays the true labels and the inferenced labels. If no report is specified, the script uses a default report for prediction, as in the following example output: 
-
-```
-   python predictions.py
-   
-   MTCNN Prediction
-   prostate
-   8140.0
-   8141.
-   Original Labels
-         filename                                             site            histology
-   3555  TCGA-2A-AAYO.3889AA76-F350-4DA4-987B-79E8D2349...    "prostate"      8140.0
-
+   task 0 test micro: 0.9661949685534591
+   task 0 test macro: 0.9228817377788936
+   task 1 test micro: 0.7672955974842768
+   task 1 test macro: 0.3501320612252872
 ```
 
 ### Disclaimer
