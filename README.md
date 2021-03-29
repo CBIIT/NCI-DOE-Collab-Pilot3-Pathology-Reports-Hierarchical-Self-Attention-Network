@@ -1,4 +1,4 @@
-## Pathology Reports Hierarchical Self-Attention Networks (HiSAN)
+## Pathology Reports Hierarchical Self-Attention Network (HiSAN)
 
 ### Description
 This purpose of the HiSAN model is to automate information abstraction (e.g. Cancer site, laterality, behavior, etc.) from unstructured cancer pathology text reports using natural language processing (NLP) and information extraction from free-form texts. 
