@@ -27,7 +27,7 @@ To set up the data, run the following commands from the top level directory of t
 1. Download the reports needed to train and test the model, and the trained model file:
    1. Create an account on the Model and Data Clearinghouse ([MoDaC](https://modac.cancer.gov)). 
    2. Run the script  [./data_utils/download_data.py](./data_utils/download_data.py). This script downloads the reports and their corresponding metadata from MoDaC.
-   3. When prompted by the training and test scripts, enter your MoDaC credentials.
+   3. When prompted, enter your MoDaC credentials.
 2. Generate training/validaton/test datasets by running the script [./data_utils/trainTestSplitMetaData.py](./data_utils/trainTestSplitMetaData.py). This script splits the data into training/validation/test datasets and maps the site and histology to integer categories. 
 3. Process reports and generate features by running the script [./data_utils/data_handler.py](./data_utils/data_handler.py). This script does the following: 
    * Cleans up punctuation and unecessary tokens from the reports.
