@@ -14,7 +14,7 @@ Classification of unstructured text is a classical problem in natural languag
 
 ### Components
 The following components are in the [Pathology Reports HiSAN] &#x1F534;_**(Link TBD)**_ dataset and the [ML Ready Pathology Reports](https://modac.cancer.gov/searchTab?dme_data_id=NCI-DME-MS01-7423964) dataset in the Model and Data Clearinghouse (MoDaC):
-* Original data used for training, validation and testing.
+* Original data used for training, validation, and testing.
 * Trained model weights and topology to be used in inference.
 
 ### Technical Details
