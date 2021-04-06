@@ -55,7 +55,12 @@ task 1 test macro: 0.3562566082744524
 
 ### Inference on Test Dataset
 To test the trained model in inference:
-1. Download the trained model by running the script (download_model.py)[./data_utils/download_model.py]. 
+1. Download the trained model from [MoDaC](https://modac.cancer.gov/searchTab?dme_data_id=NCI-DME-MS01-7565752) by running the script (download_model.py)[./data_utils/download_model.py]. 
+
+```bash
+    python ./data_utils/download_model.py
+```
+
 2. Run the script (tf_mthisan.py)[./tf_mthisan.py] with the --test option set. The script performs the following:
    * Performs inference on the test dataset.
    * Reports the micro, macro F1 scores of the model on the test dataset.
@@ -63,7 +68,7 @@ To test the trained model in inference:
 Here is example output from running the script:
 
 ```bash
-   python tf_mthisan.py --test 
+   python tf_mthisan.py --test --saved_model ./hisan-trained-model/model/savedmodels 
    .....
 
    task 0 test micro: 0.9661949685534591
