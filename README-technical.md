@@ -55,7 +55,7 @@ task 1 test macro: 0.3562566082744524
 
 ### Inference on Test Dataset
 To test the trained model in inference:
-1. Download the trained model from [MoDaC](https://modac.cancer.gov/searchTab?dme_data_id=NCI-DME-MS01-7565752) by running the script (download_model.py)[./data_utils/download_model.py]. 
+1. Download the trained model from MoDaC by running the script (download_model.py)[./data_utils/download_model.py]. 
 
 ```bash
     python ./data_utils/download_model.py
