@@ -1,5 +1,5 @@
 ### Model Description
-A hierarchical self attention network is a deep learning model composed of hierarchies where the computationally expensive RNN layers are replaced with self-attention mechanisms. The model has two "hierarchies". The lower hierarchy takes in one sentence at a time, broken into word embeddings. This hierarchy outputs a weighted sentence embedding based on the words in the sentence that are most relevant to the classification. The upper hierarchy takes in one document at a time, broken into the sentence embeddings from the lower hierarchy. This hierarchy outputs a weighted document embedding based on the sentences in the document that are most relevant to the classification. Dropout is applied to this final document embedding, and it is then fed into a softmax classifier. 
+The Pathology Reports Hierarchical Self-Attention Network (HiSAN) is a deep learning model composed of hierarchies where the computationally-expensive recurrent neural network (RNN) layers are replaced with self-attention mechanisms. The model has two "hierarchies". The lower hierarchy takes in one sentence at a time, broken into word embeddings. This hierarchy outputs a weighted sentence embedding based on the words in the sentence that are most relevant to the classification. The upper hierarchy takes in one document at a time, broken into the sentence embeddings from the lower hierarchy. This hierarchy outputs a weighted document embedding based on the sentences in the document that are most relevant to the classification. Dropout is applied to this final document embedding, and it is then fed into a softmax classifier. 
 
 ### Completed Model Trans_Validate Template
 | Attribute  | Value |
@@ -27,7 +27,7 @@ To set up the data, run the following commands from the top level directory of t
 1. Download the reports needed to train and test the model, and the trained model file:
    1. Create an account on the Model and Data Clearinghouse ([MoDaC](https://modac.cancer.gov)). 
    2. Run the script  [./data_utils/download_data.py](./data_utils/download_data.py). This script downloads the reports and their corresponding metadata from MoDaC.
-   3. When prompted by the training and test scripts, enter your MoDaC credentials.
+   3. When prompted, enter your MoDaC credentials.
 2. Generate training/validaton/test datasets by running the script [./data_utils/trainTestSplitMetaData.py](./data_utils/trainTestSplitMetaData.py). This script splits the data into training/validation/test datasets and maps the site and histology to integer categories. 
 3. Process reports and generate features by running the script [./data_utils/data_handler.py](./data_utils/data_handler.py). This script does the following: 
    * Cleans up punctuation and unecessary tokens from the reports.
