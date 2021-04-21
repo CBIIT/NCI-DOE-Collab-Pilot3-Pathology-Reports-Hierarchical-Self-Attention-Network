@@ -61,7 +61,7 @@ To test the trained model in inference:
     python ./data_utils/download_model.py
 ```
 
-2. Run the script (tf_mthisan.py)[./tf_mthisan.py] with the --test option set. The script performs the following:
+2. Run the script [tf_mthisan.py](./tf_mthisan.py) with the --test option set. The script performs the following:
    * Performs inference on the test dataset.
    * Reports the micro, macro F1 scores of the model on the test dataset.
 
