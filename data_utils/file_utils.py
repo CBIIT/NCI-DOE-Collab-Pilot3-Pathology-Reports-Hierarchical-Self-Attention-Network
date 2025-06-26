@@ -112,7 +112,10 @@ def get_file(fname, origin, untar=False,
     '''
 
     if download:
-        if 'modac.cancer.gov' in origin:
+        from urllib.parse import urlparse
+        parsed_url = urlparse(origin)
+        host = parsed_url.hostname
+        if host and (host == "modac.cancer.gov" or host.endswith(".modac.cancer.gov")):
             get_file_from_modac(fpath, origin)
         else:
             print('Downloading data from', origin)
